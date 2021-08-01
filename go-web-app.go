@@ -3,16 +3,40 @@ package main
 import (
 	"fmt"
 	"github.com/gorilla/mux"
+	"html/template"
 	"net/http"
 )
 
+type LayoutData struct {
+	PageTitle string
+}
+
 func HomeHandler(w http.ResponseWriter, r *http.Request) {
+	tmpl, err := template.ParseFiles("templates/layout.html")
+
+	if err != nil {
+		fmt.Fprintf(w, "Something has gone horribly wrong")
+		return
+	}
+
 	w.WriteHeader(http.StatusOK)
-	fmt.Fprintf(w, "Welcome home!")
+	tmpl.Execute(w, LayoutData{
+		PageTitle: "J. Michael Ward, Software Engineer",
+	})
 }
 
 func AboutHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "All about me!")
+	tmpl, err := template.ParseFiles("templates/layout.html")
+
+	if err != nil {
+		fmt.Fprintf(w, "Something has gone horribly wrong")
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	tmpl.Execute(w, LayoutData{
+		PageTitle: "J. Michael Ward, Software Engineer – About",
+	})
 }
 
 
