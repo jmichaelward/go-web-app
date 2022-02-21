@@ -39,7 +39,6 @@ func AboutHandler(w http.ResponseWriter, r *http.Request) {
 	})
 }
 
-
 func main() {
 	router := mux.NewRouter()
 
@@ -48,5 +47,5 @@ func main() {
 
 	http.Handle("/", router)
 
-	http.ListenAndServe(":80", router)
+	http.ListenAndServe(":8000", router)
 }
